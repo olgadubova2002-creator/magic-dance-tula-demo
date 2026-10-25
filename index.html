@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magic Dance · школа танцев в Туле</title>
+<meta name="description" content="Школа танцев Magic Dance в Туле: малыши, дети, подростки и взрослые, ансамбль «Ассоль», концерты и конкурсы. Запись по телефону и во ВКонтакте.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/logo.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e9e8e4; --surface: #dad8d2; --paper: #f3f3f0;
+  --ink: #1c1214; --muted: #483d3b;
+  --field: #6e1822; --field-ink: #f3f3f0;
+  --accent: #f0b323; --accent-ink: #1c1214;
+  --dark: #1c1214; --dark-ink: #efeeea;
+  --step-small: clamp(0.875rem, 0.84rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --step-lead: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);
+  --step-head: clamp(2.1rem, 1.4rem + 3vw, 4rem);
+  --step-display: clamp(3.2rem, 1.5rem + 4.6vw, 5.5rem);
+  --m: clamp(16px, 2.2vw, 32px);
+  --gap: clamp(88px, 11vw, 180px);
+  --font: "STIX Two Text", "Times New Roman", Georgia, serif;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); font-size: var(--step-body); line-height: 1.5; color: var(--ink); background: var(--bg); }
+img { display: block; max-width: 100%; height: auto; }
+h1,h2,h3,p,ul,ol,figure,blockquote { margin: 0; padding: 0; }
+ul,ol { list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+.h { font-weight: 400; letter-spacing: -.026em; line-height: 1.08; font-size: var(--step-head); text-wrap: balance; }
+.small { font-size: var(--step-small); }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; background: var(--accent); color: var(--accent-ink);
+  font: 600 var(--step-body)/1 var(--font); text-decoration: none; border: 0; border-radius: 0; cursor: pointer;
+  transition: transform .25s var(--ease), background-color .25s var(--ease); }
+.btn:hover { transform: translateY(-2px); background: #ffc533; }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn--ink { background: var(--ink); color: var(--paper); }
+.btn--ink:hover { background: #3a2226; }
+
+/* входные движения: контент виден и без скрипта */
+.js .r { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .r.in { opacity: 1; transform: none; }
+
+/* ---------- шапка + первый экран: приглашение-афиша ---------- */
+.hero { position: relative; background: var(--field); color: var(--field-ink); height: min(100svh, 900px); min-height: 640px; overflow: hidden; }
+.bar { position: absolute; inset: 0 0 auto 0; z-index: 5; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 20px var(--m); gap: 16px; }
+.bar__mark { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 600; justify-self: start; min-height: 44px; }
+.bar__mark img { width: 44px; height: 44px; border-radius: 50%; }
+.bar nav { display: flex; gap: clamp(18px, 3vw, 44px); }
+.bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; transition: color .2s; }
+.bar nav a:hover { color: var(--accent); }
+.bar .btn { justify-self: end; min-height: 48px; padding: 0 22px; }
+.card { position: absolute; left: 50%; top: 190px; width: min(74vw, 1060px); aspect-ratio: 5 / 7; transform: translateX(-50%); background: var(--paper); color: var(--ink);
+  padding: 56px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.card::before, .card::after { content: ""; position: absolute; top: -14px; width: 28px; height: 28px; border-radius: 50%; background: var(--field); }
+.card::before { left: -14px; } .card::after { right: -14px; }
+.card__place { color: var(--muted); font-size: var(--step-body); }
+.card h1 { font-weight: 400; font-style: italic; letter-spacing: -.026em; line-height: 1.06; font-size: clamp(1.7rem, .6rem + 3.9vw, 4.5rem); margin-top: 22px; width: 100%; }
+.card h1 span { display: block; white-space: nowrap; }
+.card h1 span:first-child { text-align: left; }
+.card h1 span:last-child { text-align: right; }
+.card__facts { margin-top: 28px; display: grid; gap: 6px; font-size: var(--step-body); }
+.card__facts i { display: inline-block; width: 10px; height: 10px; background: var(--field); transform: rotate(45deg); margin: 0 14px; vertical-align: middle; }
+.card__cta { margin-top: 28px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.card__plate { margin: 36px -40px -56px; width: calc(100% + 80px); }
+.card__plate img { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; object-position: 50% 80%; }
+.card__cta a:not(.btn) { font-weight: 600; text-underline-offset: 4px; }
+.hero__logo { position: absolute; z-index: 1; width: clamp(120px, 14vw, 210px); border-radius: 50%; right: 7vw; top: 22%; }
+.hero__logo--l { right: auto; left: 7vw; top: auto; bottom: 14%; width: clamp(80px, 9vw, 140px); }
+
+/* ---------- письмо ---------- */
+section { position: relative; }
+.pad { padding-block: var(--gap); }
+.letter { width: min(580px, 100% - 2 * var(--m)); margin-inline: auto; display: grid; gap: 22px; }
+.letter__top { display: flex; align-items: center; gap: 16px; }
+.letter__top img { width: 44px; height: 44px; border-radius: 50%; }
+.letter p { font-size: var(--step-body); line-height: 1.55; }
+.mark { background: var(--accent); padding: 0 .2em; }
+.letter__sign { font-style: italic; font-size: var(--step-lead); margin-top: 6px; }
+.letter__role { color: var(--muted); font-size: var(--step-small); }
+
+/* ---------- как начать ---------- */
+.start { background: var(--surface); padding-block: var(--gap); }
+.start__in { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); padding-inline: var(--m); align-items: start; }
+.start__lead { position: sticky; top: 100px; display: grid; gap: 20px; justify-items: start; }
+.start__lead p { max-width: 34ch; }
+.steps { display: grid; gap: 14px; counter-reset: s; }
+.steps li { background: var(--paper); padding: 28px clamp(22px, 3vw, 40px); display: grid; gap: 6px; counter-increment: s; transition: translate .3s var(--ease); }
+.steps li:nth-child(even) { margin-left: clamp(0px, 4vw, 56px); }
+.steps li:hover { translate: 6px 0; }
+.steps h3 { font-weight: 600; font-size: var(--step-lead); line-height: 1.15; }
+.steps p { color: var(--muted); }
+
+/* ---------- подберите группу (живая вещь) ---------- */
+.pick { background: var(--dark); color: var(--dark-ink); padding-block: clamp(72px, 9vw, 140px); }
+.pick__in { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); padding-inline: var(--m); align-items: center; }
+.pick__tabs { display: grid; gap: 12px; margin-top: 32px; max-width: 460px; }
+.pick__tabs button { font: 400 var(--step-lead)/1.1 var(--font); text-align: left; padding: 16px 20px; min-height: 56px; background: #2c1c20; color: var(--dark-ink); border: 0; border-radius: 0; cursor: pointer;
+  transition: background-color .2s, color .2s, transform .2s var(--ease); }
+.pick__tabs button:hover { background: #3b262b; transform: translateX(4px); }
+.pick__tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); }
+.ticket { background: var(--paper); color: var(--ink); padding: clamp(28px, 4vw, 56px); display: grid; gap: 18px; position: relative;
+}
+.ticket::before, .ticket::after { content: ""; position: absolute; top: 50%; width: 30px; height: 30px; margin-top: -15px; border-radius: 50%; background: var(--dark); }
+.ticket::before { left: -15px; } .ticket::after { right: -15px; }
+.ticket h3 { font-weight: 400; font-style: italic; letter-spacing: -.02em; font-size: var(--step-head); line-height: 1.05; }
+.ticket p { max-width: 46ch; }
+.ticket__price { display: flex; justify-content: space-between; gap: 16px; font-size: var(--step-lead); background: var(--surface); padding: 14px 18px; }
+.ticket__price b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.ticket .btn { justify-self: start; }
+.ticket[data-swap] { animation: swap .45s var(--ease); }
+@keyframes swap { from { opacity: .0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---------- события: плитки с ярлыками ---------- */
+.events { padding-inline: var(--m); }
+.events__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+.events__head p { max-width: 38ch; color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 12px; }
+.tile { display: block; text-decoration: none; transition: transform .35s var(--ease); }
+.tile:hover { transform: translateY(-6px); }
+.tile img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.tile figcaption { padding: 14px 14px 16px; display: grid; gap: 4px; background: var(--tb); color: var(--tc); }
+.tile b { font-weight: 600; font-size: var(--step-body); line-height: 1.2; }
+.tile span { font-size: var(--step-small); font-variant-numeric: tabular-nums; }
+.grid li:nth-child(4n+1) .tile { --tb: var(--field); --tc: var(--field-ink); }
+.grid li:nth-child(4n+2) .tile { --tb: var(--accent); --tc: var(--accent-ink); }
+.grid li:nth-child(4n+3) .tile { --tb: var(--ink); --tc: var(--paper); }
+.grid li:nth-child(4n+4) .tile { --tb: var(--surface); --tc: var(--ink); }
+
+/* ---------- программа: меню на красном поле ---------- */
+.menu { background: var(--field); padding-block: clamp(72px, 9vw, 140px); }
+.sheet { width: min(640px, 100% - 20px); margin-inline: auto; background: var(--paper); color: var(--ink); padding: 72px clamp(28px, 6vw, 64px);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'9'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H24V9H0Z%20M3%200A9%209%200%200%200%2021%200Z'%2F%3E%3C%2Fsvg%3E") top/24px 9px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'9'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H24V9H0Z%20M3%209A9%209%200%200%201%2021%209Z'%2F%3E%3C%2Fsvg%3E") bottom/24px 9px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'4'%20height%3D'4'%3E%3Crect%20width%3D'4'%20height%3D'4'%2F%3E%3C%2Fsvg%3E") 0 9px/100% calc(100% - 18px) no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'9'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H24V9H0Z%20M3%200A9%209%200%200%200%2021%200Z'%2F%3E%3C%2Fsvg%3E") top/24px 9px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'9'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H24V9H0Z%20M3%209A9%209%200%200%201%2021%209Z'%2F%3E%3C%2Fsvg%3E") bottom/24px 9px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'4'%20height%3D'4'%3E%3Crect%20width%3D'4'%20height%3D'4'%2F%3E%3C%2Fsvg%3E") 0 9px/100% calc(100% - 18px) no-repeat }
+.sheet h2 { font-weight: 400; font-style: italic; letter-spacing: -.026em; line-height: 1.05; font-size: var(--step-head); text-align: center; }
+.sheet__note { text-align: center; color: var(--muted); margin-top: 12px; }
+.grp { margin-top: 48px; }
+.grp h3 { font-weight: 600; font-size: var(--step-lead); text-align: center; margin-bottom: 18px; }
+.item { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin-bottom: 18px; align-items: baseline; }
+.item b { font-weight: 400; font-size: var(--step-body); }
+.item .p { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
+.item small { grid-column: 1; color: var(--muted); font-size: var(--step-small); }
+.sheet__hours { text-align: center; margin-top: 40px; display: grid; gap: 4px; }
+
+/* ---------- отзывы: листки ---------- */
+.slips { padding: var(--gap) var(--m); background: var(--surface); overflow: hidden; }
+.slips h2 { max-width: 14ch; }
+.slips__row { display: flex; align-items: flex-start; justify-content: center; margin-top: 56px; padding-bottom: 0; }
+.slip { background: var(--paper); width: min(330px, 30vw); padding: 36px 30px 44px; display: grid; gap: 14px; margin-inline: -10px;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'20'%20height%3D'7'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H20V7H0Z%20M3%200A7%207%200%200%200%2017%200Z'%2F%3E%3C%2Fsvg%3E") top/20px 7px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'20'%20height%3D'7'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H20V7H0Z%20M3%207A7%207%200%200%201%2017%207Z'%2F%3E%3C%2Fsvg%3E") bottom/20px 7px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'4'%20height%3D'4'%3E%3Crect%20width%3D'4'%20height%3D'4'%2F%3E%3C%2Fsvg%3E") 0 7px/100% calc(100% - 14px) no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'20'%20height%3D'7'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H20V7H0Z%20M3%200A7%207%200%200%200%2017%200Z'%2F%3E%3C%2Fsvg%3E") top/20px 7px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'20'%20height%3D'7'%3E%3Cpath%20fill-rule%3D'evenodd'%20d%3D'M0%200H20V7H0Z%20M3%207A7%207%200%200%201%2017%207Z'%2F%3E%3C%2Fsvg%3E") bottom/20px 7px repeat-x, url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'4'%20height%3D'4'%3E%3Crect%20width%3D'4'%20height%3D'4'%2F%3E%3C%2Fsvg%3E") 0 7px/100% calc(100% - 14px) no-repeat;
+  transition: rotate .4s var(--ease), translate .4s var(--ease); }
+.slip:nth-child(1) { rotate: -3deg; min-height: 460px; }
+.slip:nth-child(2) { rotate: 2deg; translate: 0 36px; min-height: 380px; z-index: 2; }
+.slip:nth-child(3) { rotate: 4deg; min-height: 320px; }
+.slip:hover { rotate: 0deg; translate: 0 -8px; z-index: 3; }
+.slip__name { font-weight: 600; text-align: center; font-size: var(--step-body); }
+.slip__date { color: var(--muted); font-size: var(--step-small); text-align: center; }
+.slip p { font-size: var(--step-body); line-height: 1.45; }
+.rate { margin-top: 36px; max-width: 60ch; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+.rate b { font-size: var(--step-head); font-weight: 400; line-height: 1; font-variant-numeric: tabular-nums; }
+
+/* ---------- контакт: карточка на фото ---------- */
+.visit { display: grid; grid-template-columns: 1fr 1fr; background: var(--field); }
+.visit__bg { width: 100%; height: 100%; min-height: 640px; object-fit: cover; animation: none; }
+.visit__card { align-self: center; justify-self: center; width: min(460px, 100% - 2 * var(--m)); margin-block: 64px; background: var(--paper); border-radius: 8px; padding: 32px 32px 0; display: grid; gap: 16px; overflow: hidden; }
+.visit__card h2 { font-weight: 400; font-size: var(--step-lead); line-height: 1.1; }
+.visit__card dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; }
+.visit__card dt { color: var(--muted); }
+.visit__card dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.visit__card .btn { margin: 8px -32px 0; min-height: 56px; }
+
+/* ---------- подвал: изнанка афиши (занавес) ---------- */
+main { position: relative; z-index: 2; background: var(--bg); }
+.foot { background: var(--field); color: var(--field-ink); min-height: 80svh; padding: clamp(32px, 5vw, 64px) var(--m); display: flex; flex-direction: column; justify-content: space-between; gap: 48px; }
+.foot__big { font-style: italic; letter-spacing: -.04em; line-height: .9; font-size: clamp(4rem, 17vw, 16rem); font-weight: 400; }
+.foot__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.foot__cols h2 { font-size: var(--step-body); font-weight: 600; margin-bottom: 8px; }
+.foot__cols a { text-underline-offset: 4px; }
+.foot__cols p { font-size: var(--step-body); }
+.foot small { color: #d9b7ba; font-size: var(--step-small); }
+
+@media (max-width: 960px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .start__in { grid-template-columns: 1fr; }
+  .start__lead { position: static; }
+  .steps li:nth-child(even) { margin-left: 0; }
+  .hero { height: auto; min-height: 0; padding: 104px 12px 0; }
+  .card { position: relative; left: auto; top: auto; transform: none; width: min(100%, 600px); margin-inline: auto; aspect-ratio: auto; padding: 40px 28px 0; }
+  .hero__logo { display: none; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 20px 8px; }
+  .pick__in { grid-template-columns: 1fr; }
+  .slips__row { flex-direction: column; align-items: stretch; gap: 0; }
+  .slip { width: 78%; margin: -28px 0 0; min-height: 0 !important; }
+  .slip:nth-child(1) { margin-top: 0; rotate: -2.5deg; }
+  .slip:nth-child(2) { align-self: flex-end; rotate: 2deg; translate: 0; }
+  .slip:nth-child(3) { rotate: -2deg; }
+  .foot__cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 84px; }
+  .bar { grid-template-columns: auto 1fr; padding: 14px 16px; }
+  .bar nav { display: none; }
+  .bar .btn { padding: 0 16px; font-size: 1.05rem; }
+  .bar__mark span { display: none; }
+  .card { width: 100%; padding: 36px 14px 0; }
+  .card__plate { margin: 28px -14px 0; width: calc(100% + 28px); }
+  .card h1 { font-size: 8vw; }
+  .card h1 span { white-space: normal; }
+  .card h1 span:first-child, .card h1 span:last-child { text-align: center; }
+  .card__facts i { margin: 0 8px; }
+  .visit { grid-template-columns: 1fr; }
+  .visit__bg { min-height: 0; height: 56svh; }
+  .visit__card { margin: -72px 16px 24px; width: calc(100% - 32px); position: relative; }
+  .sheet { padding: 56px 24px; }
+  .foot__cols { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .r { opacity: 1; transform: none; transition: none; }
+  .visit__bg, .ticket[data-swap] { animation: none; }
+  .btn, .tile, .slip { transition: none; }
+  .slip { rotate: 0deg !important; translate: 0 !important; }
+}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<main>
+  <header class="hero" id="top">
+    <div class="bar">
+      <a class="bar__mark" href="#top"><img src="assets/logo.webp" alt="" width="44" height="44"><span>Magic Dance</span></a>
+      <nav aria-label="Разделы">
+        <a href="#events">События</a>
+        <a href="#prices">Цены</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a class="btn" href="https://vk.me/magic_dance_tula" rel="noopener">Записаться</a>
+    </div>
+    <div class="card">
+      <p class="card__place r" style="--i:0">Приглашаем на занятие · Тула, ул. Болдина, 141</p>
+      <h1 class="r" style="--i:1"><span>Школа танцев в Туле –</span><span>дети учатся и выходят на сцену</span></h1>
+      <p class="card__facts r" style="--i:2"><span>Малыши<i></i>дети<i></i>подростки<i></i>взрослые</span><span>С нуля. Концерты и конкурсы</span></p>
+      <div class="card__cta r" style="--i:3">
+        <a class="btn btn--ink" href="https://vk.me/magic_dance_tula" rel="noopener">Записаться на занятие</a>
+        <a href="tel:+79207540051">+7 (920) 754-00-51</a>
+      </div>
+      <figure class="card__plate r" style="--i:4"><img src="assets/stage.webp" alt="Ученики школы Magic Dance на сцене на фоне баннеров с названием школы" width="612" height="354" fetchpriority="high"></figure>
+    </div>
+  </header>
+
+  <section class="pad" id="about" aria-labelledby="about-h">
+    <div class="letter">
+      <div class="letter__top r"><img src="assets/logo.webp" alt="" width="44" height="44"><h2 id="about-h" style="font-size:var(--step-lead);font-weight:400">Письмо от школы</h2></div>
+      <p class="r" style="--i:1">Мы – школа танцев Magic Dance в Туле. К нам приходят малыши, дети, подростки и взрослые, и начать можно с нуля, без опыта и «формы».</p>
+      <p class="r" style="--i:2">Танец у нас не заканчивается в зале. Мы ставим номера и выходим с ними на сцену: праздники, концерты, фестивали, конкурсы. Недавно хореографический ансамбль «Ассоль» получил <span class="mark">Гран-при международного конкурса</span> «Парящий орёл» в номинации «Народный танец», а ученики вернулись с наградами «Преображения».</p>
+      <p class="r" style="--i:3">Мы занимаемся в двух залах на улице Болдина. Позвоните или напишите нам во ВКонтакте: подскажем группу и время.</p>
+      <p class="letter__sign r" style="--i:4">Школа танцев Magic Dance<br><span class="letter__role">Тула, улица Болдина</span></p>
+    </div>
+  </section>
+
+  <section class="start" id="start" aria-labelledby="st-h">
+    <div class="start__in">
+      <div class="start__lead r">
+        <h2 class="h" id="st-h">Как начать</h2>
+        <p>Опыт не нужен. Расписание и свободные места лучше уточнить у администратора: группы собираются по возрасту.</p>
+        <a class="btn btn--ink" href="tel:+79207540051">Позвонить +7 (920) 754-00-51</a>
+      </div>
+      <ol class="steps">
+        <li class="r"><h3>Позвоните или напишите во ВКонтакте</h3><p>Назовите возраст и пожелания. Подскажем подходящую группу и время.</p></li>
+        <li class="r" style="--i:1"><h3>Приходите в зал</h3><p>Улица Болдина, 141 (угол Оружейной, 24), цокольный этаж. Есть второй зал на Болдина, 98Б/2.</p></li>
+        <li class="r" style="--i:2"><h3>Учим движения и ставим танец</h3><p>От азов до постановки номера. Начинающие занимаются в своём темпе и не сравнивают себя с теми, кто танцует давно.</p></li>
+        <li class="r" style="--i:3"><h3>Выходим на сцену</h3><p>Концерты школы, праздники и конкурсы: «Время талантов», «Золотое яблоко», «Браво, танцор!».</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="pick" id="groups" aria-labelledby="pick-h">
+    <div class="pick__in">
+      <div class="r">
+        <h2 class="h" id="pick-h">Для кого занятие?</h2>
+        <p style="margin-top:18px;max-width:34ch;color:#cfccc4">Выберите, для кого ищете занятие.</p>
+        <div class="pick__tabs" role="tablist" aria-label="Для кого занятие">
+          <button role="tab" aria-selected="false" data-k="kids">Малыши</button>
+          <button role="tab" aria-selected="true" data-k="child">Дети</button>
+          <button role="tab" aria-selected="false" data-k="teen">Подростки</button>
+          <button role="tab" aria-selected="false" data-k="adult">Взрослые</button>
+        </div>
+      </div>
+      <article class="ticket r" style="--i:2" id="ticket" aria-live="polite">
+        <h3 id="t-h">Дети</h3>
+        <p id="t-p">Ансамбль «Ассоль»: набор детей 5–7 лет. Народные танцы, выступления и конкурсы. Для остальных возрастов подберём группу при записи.</p>
+        <div class="ticket__price"><span id="t-l">Набор в «Ассоль»</span><b id="t-v">500 ₽</b></div>
+        <a class="btn" href="tel:+79207540051">Позвонить и записаться</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="pad events" id="events" aria-labelledby="ev-h">
+    <div class="events__head">
+      <h2 class="h r" id="ev-h">События школы</h2>
+      <p class="r" style="--i:1">Праздники, фестивали и концерты школы. Все альбомы – в группе ВКонтакте.</p>
+    </div>
+    <ul class="grid">
+      <li class="r" style="--i:0"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/talanty.webp" alt="Девочка в оранжевом костюме на конкурсе «Время талантов»" width="800" height="1000" loading="lazy" style="object-position:50% 25%"><figcaption><b>Время талантов</b><span>35 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+      <li class="r" style="--i:1"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/yabloko.webp" alt="Ученики школы в народных костюмах на сцене смены «Золотое яблоко»" width="800" height="1000" loading="lazy" style="object-position:30% 50%"><figcaption><b>«Золотое яблоко»</b><span>123 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+      <li class="r" style="--i:2"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/derevnya.webp" alt="Участницы «Танцевальной деревни» в зале с надписью Dance Camp" width="800" height="1000" loading="lazy" style="object-position:50% 30%"><figcaption><b>«Танцевальная деревня»</b><span>91 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+      <li class="r" style="--i:0"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/bravo.webp" alt="Дети на сцене на фестивале «Браво, танцор!»" width="800" height="1000" loading="lazy" style="object-position:50% 35%"><figcaption><b>«Браво, танцор!»</b><span>26 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+      <li class="r" style="--i:1"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/mechta.webp" alt="Малыши в костюмах на конкурсе «Навстречу мечте»" width="800" height="1000" loading="lazy" style="object-position:40% 50%"><figcaption><b>«Навстречу мечте»</b><span>41 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+      <li class="r" style="--i:2"><a class="tile" href="https://vk.ru/magic_dance_tula" rel="noopener"><figure><img src="assets/kostroma.webp" alt="Танцовщица в костюме на сцене фестиваля в Костроме" width="800" height="1000" loading="lazy" style="object-position:45% 40%"><figcaption><b>Кострома, 21–23 декабря</b><span>39 фото · альбом ВКонтакте</span></figcaption></figure></a></li>
+    </ul>
+  </section>
+
+  <section class="menu" id="prices" aria-labelledby="pr-h">
+    <div class="sheet r">
+      <h2 id="pr-h">Что можно выбрать</h2>
+      <p class="sheet__note">Цены уточняйте у администратора. Оплата наличными.</p>
+      <div class="grp">
+        <h3>Хореографический ансамбль</h3>
+        <div class="item"><b>«Ассоль»: набор детей 5–7 лет</b><span class="p">500 ₽</span><small>Народные танцы, выступления и конкурсы</small></div>
+      </div>
+      <div class="grp">
+        <h3>Группы по возрасту</h3>
+        <div class="item"><b>Малыши</b><span class="p">уточнить</span><small>Первые занятия для самых маленьких</small></div>
+        <div class="item"><b>Дети и подростки</b><span class="p">уточнить</span><small>Постановка танца, концерты и конкурсы</small></div>
+        <div class="item"><b>Взрослые</b><span class="p">уточнить</span><small>Танцы для начинающих, с нуля</small></div>
+      </div>
+      <div class="grp">
+        <h3>Праздники</h3>
+        <div class="item"><b>Артисты на мероприятия</b><span class="p">уточнить</span><small>Выступление на вашем празднике</small></div>
+        <div class="item"><b>Подарочный сертификат</b><span class="p">уточнить</span><small>Занятия в подарок ребёнку или взрослому</small></div>
+      </div>
+      <p class="sheet__hours"><span>Два зала: Болдина, 141 и Болдина, 98Б/2</span><span>Запись предварительная, по телефону</span></p>
+    </div>
+  </section>
+
+  <section class="slips" aria-labelledby="rv-h">
+    <h2 class="h r" id="rv-h">Что пишут на Яндекс.Картах</h2>
+    <ul class="slips__row">
+      <li class="slip r"><span class="slip__name">Лариса Поддорогина</span><span class="slip__date">3 февраля 2025</span><p>«Школа танцев Magic dance изначально была выбрана среди многих в интернете по удобному месторасположении расписанию. Дочка с удовольствием ходит на занятия, получает море положительных эмоций и навыки танца. Вообщем прекрасная школа танцев, занятия разносторонние, педагоги хорошие»</p></li>
+      <li class="slip r" style="--i:1"><span class="slip__name">Наталья</span><span class="slip__date">7 февраля 2025</span><p>«Отличное место. Замечательные преподаватели. Ходим давно. Детям нравится, родители довольны. И для здоровья полезно, и для фигуры.»</p></li>
+      <li class="slip r" style="--i:2"><span class="slip__name">Евгения</span><span class="slip__date">8 августа 2025</span><p>«Хорошее место,рекомендую!»</p></li>
+    </ul>
+    <p class="rate r"><b>4,4</b><span>15 оценок, 6 отзывов. Отзывы скопированы с карточки без правок. <a href="https://yandex.ru/maps/org/magic_dance/149095871145/" target="_blank" rel="noopener">Все отзывы</a></span></p>
+  </section>
+
+  <section class="visit" id="contact" aria-labelledby="ct-h">
+    <img class="visit__bg" src="assets/building.webp" alt="Здание на улице Болдина, 141, где находится школа танцев Magic Dance" width="571" height="354" loading="lazy">
+    <div class="visit__card r">
+      <h2 id="ct-h">Приходите на занятие</h2>
+      <p>Тула, ул. Болдина, 141<br>угол Оружейной, 24, цокольный этаж</p>
+      <dl>
+        <dt>Второй зал</dt><dd>ул. Болдина, 98Б/2</dd>
+        <dt>Часы</dt><dd>уточняйте по телефону</dd>
+        <dt>Телефон</dt><dd><a href="tel:+79207540051">+7 920 754-00-51</a></dd>
+        <dt>Второй</dt><dd><a href="tel:+79531808079">+7 953 180-80-79</a></dd>
+      </dl>
+      <a class="btn" href="https://vk.me/magic_dance_tula" rel="noopener">Записаться на занятие</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__cols">
+    <div><h2>Школа танцев</h2><p>Малыши, дети, подростки и взрослые, постановка танца, артисты для мероприятий.</p></div>
+    <div><h2>Адрес</h2><p>Тула, ул. Болдина, 141 (цоколь) и ул. Болдина, 98Б/2</p></div>
+    <div><h2>Телефоны</h2><p><a href="tel:+79207540051">+7 (920) 754-00-51</a><br><a href="tel:+79531808079">+7 953 180-80-79</a></p></div>
+    <div><h2>Мы онлайн</h2><p><a href="https://vk.ru/magic_dance_tula" rel="noopener">ВКонтакте</a><br><a href="https://yandex.ru/maps/org/magic_dance/149095871145/" rel="noopener">Яндекс Карты</a></p></div>
+  </div>
+  <p class="foot__big">Magic Dance</p>
+  <small>Фото: альбомы школы во ВКонтакте и карточка на Яндекс Картах. Демо-версия сайта: цены уточняются у школы.</small>
+</footer>
+
+<script>
+(function () {
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 }) : null;
+  document.querySelectorAll('.r').forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); });
+
+  var D = {
+    kids:  ['Малыши', 'Первые занятия для самых маленьких: движение, музыка и знакомство с залом. Возраст и расписание подскажем при записи.', 'Стоимость', 'уточнить'],
+    child: ['Дети', 'Ансамбль «Ассоль»: набор детей 5–7 лет. Народные танцы, выступления и конкурсы. Для остальных возрастов подберём группу при записи.', 'Набор в «Ассоль»', '500 ₽'],
+    teen:  ['Подростки', 'Постановка танца, концерты, фестивали и конкурсы. Ученики школы выезжают на выступления, например в Кострому и Орёл.', 'Стоимость', 'уточнить'],
+    adult: ['Взрослые', 'Танцы для начинающих: приходите с нуля, без опыта и «слишком поздно». Группу и время подскажем по телефону.', 'Стоимость', 'уточнить']
+  };
+  var tabs = document.querySelectorAll('.pick__tabs button'), t = document.getElementById('ticket');
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var d = D[b.dataset.k];
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      document.getElementById('t-h').textContent = d[0]; document.getElementById('t-p').textContent = d[1];
+      document.getElementById('t-l').textContent = d[2]; document.getElementById('t-v').textContent = d[3];
+      t.removeAttribute('data-swap'); void t.offsetWidth; t.setAttribute('data-swap', '');
+    });
+  });
+})();
+</script>
+</body>
+</html>
